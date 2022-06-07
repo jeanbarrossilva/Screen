@@ -1,0 +1,41 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdk versions.screen.sdk.compile
+
+    defaultConfig {
+        minSdk versions.screen.sdk.min
+        targetSdk versions.screen.sdk.target
+
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility versions.java
+        targetCompatibility versions.java
+    }
+
+    kotlinOptions {
+        jvmTarget = versions.java.toString()
+    }
+}
+
+dependencies {
+    implementation implementations.appcompat
+    implementation implementations.compose.material_icons_core
+    implementation implementations.compose.ui
+    implementation implementations.screen.screen
+    implementation implementations.navigation.runtime
+}

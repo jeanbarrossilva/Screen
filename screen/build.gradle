@@ -1,0 +1,82 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
+}
+
+android {
+    namespace = 'com.jeanbarrossilva.screen'
+    compileSdk versions.screen.sdk.compile
+
+    defaultConfig {
+        minSdk versions.screen.sdk.min
+        targetSdk versions.screen.sdk.target
+
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility versions.java
+        targetCompatibility versions.java
+    }
+
+    kotlinOptions {
+        jvmTarget = versions.java.toString()
+        freeCompilerArgs += ['-Xopt-in=kotlin.RequiresOptIn']
+        useIR = true
+    }
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion versions.compose
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = 'com.jeanbarrossilva'
+                artifactId = 'screen'
+                version = versions.screen.name
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation implementations.appcompat
+    implementation implementations.compose.material
+    implementation implementations.gson
+    implementation implementations.kotlin.reflect
+    implementation implementations.material_motion_compose.core
+    implementation implementations.material_motion_compose.navigation
+    implementation implementations.navigation.runtime
+
+    androidTestImplementation implementations.kotlin.test
+    androidTestImplementation implementations.navigation.testing
+    androidTestImplementation implementations.screen.screen_test
+    androidTestImplementation implementations.test.core
+
+    testImplementation implementations.kotlin.test
+}

@@ -1,0 +1,54 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdk versions.screen.sdk.compile
+
+    defaultConfig {
+        applicationId 'com.jeanbarrossilva.screen'
+        minSdk versions.screen.sdk.min
+        targetSdk versions.screen.sdk.target
+        versionCode versions.screen.code
+        versionName versions.screen.name
+
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility versions.java
+        targetCompatibility versions.java
+    }
+
+    kotlinOptions {
+        jvmTarget = versions.java.toString()
+        freeCompilerArgs += ['-Xopt-in=kotlin.RequiresOptIn']
+        useIR = true
+    }
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion versions.compose
+    }
+}
+
+dependencies {
+    implementation implementations.appcompat
+    implementation implementations.compose.material
+    implementation implementations.compose.ui_tooling
+    implementation implementations.material
+    implementation implementations.material_motion_compose.navigation
+    implementation implementations.screen.screen
+}

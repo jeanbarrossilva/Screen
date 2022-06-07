@@ -1,0 +1,40 @@
+buildscript {
+    apply from: 'versions.gradle'
+
+    ext {
+        implementations = [
+            appcompat: "androidx.appcompat:appcompat:${versions.appcompat}",
+            compose: [
+                animation: "androidx.compose.animation:animation:${versions.compose}",
+                material: "androidx.compose.material:material:${versions.compose}",
+                material_icons_core: "androidx.compose.material:material-icons-core:" +
+                    "${versions.compose}",
+                ui: "androidx.compose.ui:ui:${versions.compose}",
+                ui_tooling: "androidx.compose.ui:ui-tooling:${versions.compose}"
+            ],
+            gson: "com.google.code.gson:gson:${versions.gson}",
+            kotlin: [
+                reflect: "org.jetbrains.kotlin:kotlin-reflect",
+                test: "org.jetbrains.kotlin:kotlin-test"
+            ],
+            material: "com.google.android.material:material:${versions.material}",
+            material_motion_compose: [
+                core: "com.github.fornewid.material-motion-compose:core:" +
+                    "${versions.material_motion_compose}",
+                navigation: "com.github.fornewid.material-motion-compose:navigation:" +
+                    "${versions.material_motion_compose}"
+            ],
+            navigation: [
+                runtime: "androidx.navigation:navigation-runtime-ktx:${versions.navigation}",
+                testing: "androidx.navigation:navigation-testing:${versions.navigation}"
+            ],
+            test: [
+                core: "androidx.test:core-ktx:${versions.test}"
+            ],
+            screen: [
+                screen: project(':screen'),
+                screen_test: project(':screen-test')
+            ]
+        ]
+    }
+}

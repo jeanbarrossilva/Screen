@@ -1,0 +1,10 @@
+buildscript {
+    apply from: 'versions.gradle'
+
+    ext {
+        _plugins = [
+            kotlin: "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}",
+            gradle: "com.android.tools.build:gradle:${versions.gradle}"
+        ]
+    }
+}
